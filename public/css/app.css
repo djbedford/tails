@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #a81a33;
+    text-align: center;
+    color: #fff;
+}
+
+header h1 {
+    margin: 0;
+    padding: 20px 0;
+}
+
+.wrapper {
+    width: 96%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#addresses li {
+    float: left;
+    list-style-type: none;
+    width: 48%;
+    padding: 1%;
+}
+
+#addresses h2, #addresses p {
+    text-align: center;
+}
+
+#addresses li a img {
+    width: 100%;
+}
+
+#addresses::after {
+    display: block;
+    content: "";
+    clear: both;
+}
