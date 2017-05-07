@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'StoresController@index');
+Route::post('/', 'StoresController@searchNearestStore');

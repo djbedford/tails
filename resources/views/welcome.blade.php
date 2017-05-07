@@ -14,20 +14,37 @@
             <h1>Tails.com</h1>
         </header>
         <div class="wrapper">
+            <div id="search">
+                <form method="post" action="{{ action('StoresController@searchNearestStore') }}">
+                    {!! csrf_field() !!}
+                    <label for="postcode">Find your nearest store</label>
+                    <input type="text" id="postcode" name="postcode" placeholder="Enter your postcode...">
+                    <button type="submit">Search</button>
+                </form>
+            </div> <!-- close #search -->
             <div id="addresses">
-                <ul>
-                    @foreach($stores as $store)
-                        <li>
-                            <h2>{{ $store['name'] }}</h2>
-                            <p>{{ $store['postcode'] }}</p>
-                            <a href="https://www.google.co.uk/maps/place/{{ $store['postcode'] }}" target="_blank">
-                                <img src="{{ $store['map'] }}" alt="street view">
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
+                @if(empty($stores))
+                    <p>Sorry we could not find a store close to that location.</p>
+                @else
+                    <ul>
+                        @foreach($stores as $store)
+                            <li>
+                                <h2>{{ $store['name'] }}</h2>
+                                <p>{{ $store['postcode'] }}</p>
+                                @if(array_key_exists('distance', $store))
+                                    <p>{{ $store['distance'] }} km</p>
+                                @endif
+                                <a href="https://www.google.co.uk/maps/place/{{ $store['postcode'] }}" target="_blank">
+                                    <img src="{{ $store['map'] }}" alt="street view">
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div> <!-- close #addresses -->
+            <div class="pagination-centered">
                 {{ $stores->links() }}
             </div>
-        </div>
+        </div> <!-- close .wrapper -->
     </body>
 </html>
